@@ -1,5 +1,5 @@
 # Media Converter Tool
-A general media converter tool powered by [ffmpeg-wasm](https://github.com/ffmpegwasm/ffmpeg.wasm). Inspired by [fireship](https://www.youtube.com/watch?v=-OTc0Ki7Sv0). All media conversion is done client-side - this server is basically just a web assembly file server! [Demo site.](converter.brianchen.me)
+A general media converter tool powered by [ffmpeg-wasm](https://github.com/ffmpegwasm/ffmpeg.wasm). Inspired by [fireship](https://www.youtube.com/watch?v=-OTc0Ki7Sv0). All media conversion is done client-side - this server is basically just a web assembly file server! [Demo site.](https://converter.brianchen.me)
 
 It currently supports swapping between file formats for video/image formats. There's a little extra bit to change the white background of .png images into transparent - it sort of works. 
 
