@@ -8,18 +8,20 @@ export default function Converter(props: any) {
     const file = props.file
     const [output, setOutput] = useState('');
     const [converting, setConverting] = useState(false);
-    const [format, setFormat] = useState('');
+    const [format, setFormat] = useState();
 
     const setConverterAndClearDownload = (e: any) => {
         setFormat(e.target.value)
+        console.log(e.target.value)
         setOutput('')
     }
 
     const convert = async() => {
         if (format) {
-            const outFormat = (format == 'png-white-to-transparent' ? 'png' : format)
-            const blobType = type + '/' + outFormat
-            const outFile = file.name.split('.')[0] + '.' + outFormat
+            const readObj = JSON.parse(format)
+            const outFile = file.name.split('.')[0] + '.' + readObj['ext']
+            console.log('hrrrrrrng')
+            console.log(outFile)
             
             setConverting(true)
             // Write file to memory
@@ -37,22 +39,22 @@ export default function Converter(props: any) {
             const data = ffmpeg.FS('readFile', outFile)
 
             // Create URL
-            const url = URL.createObjectURL(new Blob([data.buffer], {type: blobType}))
+            const url = URL.createObjectURL(new Blob([data.buffer], {type: readObj['filetype']}))
             setOutput(url)
             setConverting(false)
         }
     };
-
+    
     const optionButtons: any = options.map((key: any, value: any) => (
-        <div className="p-0.5" key={key}>
-            <label key={key}>
+        <div className="p-0.5" key={key['label']}>
+            <label key={key['label']}>
                 <input 
                     type="radio" 
                     name="input" 
                     onChange={(e) => setConverterAndClearDownload(e)}
-                    value={key} 
+                    value={JSON.stringify(key)} 
                 />
-                <span className="pl-2">{key}</span>
+                <span className="pl-2">{key['label']}</span>
             </label>
         </div>
     ));

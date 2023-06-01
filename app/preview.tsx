@@ -12,13 +12,24 @@ export default function Preview({file, ffmpeg}) {
     'image/png'
   ]
   const VIDS = [
-    'video/mp4'
+    'video/mp4',
+    'video/quicktime'
   ]
   const FFMPEG_VIDEO_FORMATS = [
     'avi',
     'gif',
     'mkv',
+    'mov',
     'mp4',
+    'mp3-audio-only'
+  ]
+  const VIDEO_CONVERTER_OUTPUTS = [
+    {'filetype': 'video/avi', 'ext': 'avi', 'label': 'avi'},
+    {'filetype': 'video/mp4', 'ext': 'mp4', 'label': 'mp4'},
+    {'filetype': 'video/mkv', 'ext': 'mkv', 'label': 'mkv'},
+    {'filetype': 'video/mov', 'ext': 'mov', 'label': 'mov'},
+    {'filetype': 'image/gif', 'ext': 'gif', 'label': 'gif'},
+    {'filetype': 'audio/mpeg', 'ext': 'mp3', 'label': 'mp3 - AUDIO ONLY'},
   ]
   const FFMPEG_IMG_FORMATS = [
     'ico',
@@ -66,7 +77,7 @@ export default function Preview({file, ffmpeg}) {
               { IMGS.includes(file.type)
                 ? <Converter type='image' options={FFMPEG_IMG_FORMATS} ffmpeg={ffmpeg} file={file}/>
                   : (VIDS.includes(file.type) || file.name.includes(".mkv"))
-                  ? <Converter type='video' options={FFMPEG_VIDEO_FORMATS} ffmpeg={ffmpeg} file={file}/>
+                  ? <Converter type='video' options={VIDEO_CONVERTER_OUTPUTS} ffmpeg={ffmpeg} file={file}/>
                   : (
                     <div></div>
                   )
